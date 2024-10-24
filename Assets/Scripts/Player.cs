@@ -33,23 +33,23 @@ public class Player : MonoBehaviour
         //Andar
         if (Input.GetKey(KeyCode.W))
         {
-            animator.SetBool("Andando", true);
+            animator.SetBool("Andar", true);
             animator.SetBool("AndarPraTras", false);
             Walk();
         }
         else if (Input.GetKey(KeyCode.S))
         {
             animator.SetBool("AndarPraTras", true);
-            animator.SetBool("Andando", false);
+            animator.SetBool("Andar", false);
             Walk();
         }
         else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
-            animator.SetBool("Andando", false);
+            animator.SetBool("Andar", false);
         }
         else
         {
-            animator.SetBool("Andando", false);
+            animator.SetBool("Andar", false);
             animator.SetBool("AndarPraTras", false);
         }
         //Pulo
@@ -76,10 +76,19 @@ public class Player : MonoBehaviour
     {
         rb.AddForce(Vector3.up * forcaPulo, ForceMode.Impulse);
         estaPulando = true;
-        animator.SetBool("EstarNoChao", false);
+        animator.SetBool("EstaNoChao", false);
     }
 
-    private void TurnAroud()
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Chao"))
+        {
+            estaPulando = false;
+            animator.SetBool("EstaNoChao", true);
+        }
+    }
+
+        private void TurnAroud()
     {
         float sideInput = Input.GetAxis("Horizontal");
         Quaternion deltaRotation = Quaternion.Euler(angleRotation * sideInput * Time.deltaTime);
