@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
+    [SerializeField] public Animator animator;
     [SerializeField] private bool estaVivo;
     [SerializeField] private int forcaPulo;
     [SerializeField] private int ouro;
     [SerializeField] private int vida;
     [SerializeField] private float velocidade;
     [SerializeField] private bool temChave;
-    [SerializeField] private bool pegando;
+    [SerializeField] public bool pegando;
     [SerializeField] private List<GameObject> inventario = new List<GameObject>();
     private Rigidbody rb;
     private bool estaPulando;
@@ -29,7 +29,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         TurnAroud();
-
+        //Pegar
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            animator.SetTrigger("Pegando");
+            pegando = true;
+        }
         //Andar
         if (Input.GetKey(KeyCode.W))
         {
@@ -57,6 +62,20 @@ public class Player : MonoBehaviour
         {
             animator.SetTrigger("Pular");
             Jump();
+        }
+        if (!estaVivo)
+        {
+            animator.SetTrigger("EstaVivo");
+            estaVivo = true;
+        }
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
+        {
+            animator.SetBool("Correr", true);
+            Walk(8);
+        }
+        else
+        {
+            animator.SetBool("Correr", false);
         }
     }
 
@@ -86,13 +105,18 @@ public class Player : MonoBehaviour
             estaPulando = false;
             animator.SetBool("EstaNoChao", true);
         }
+        if (collision.gameObject.CompareTag("Bau"))
+        {
+            Debug.Log("Aperte a Tecla E");
+        }
+
     }
 
-        private void TurnAroud()
+    private void TurnAroud()    
     {
         float sideInput = Input.GetAxis("Horizontal");
         Quaternion deltaRotation = Quaternion.Euler(angleRotation * sideInput * Time.deltaTime);
-        rb.MoveRotation(rb.rotation * deltaRotation);
+        rb.MoveRotation(rb.rotation * deltaRotation );   
     }
 
 }

@@ -17,10 +17,10 @@ public class Item : ScriptableObject
     {
         return descricao;
     }
-    public virtual Sprite sprite()
+    /*public virtual Sprite sprite()
     {
         return sprite;
-    }
+    }*/
     public virtual GameObject ItemPrefab()
     {
         return itemPrefab;

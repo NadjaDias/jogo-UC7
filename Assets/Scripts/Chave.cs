@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "Chave" , menuName = "Novo Item/ Chave")]
+[CreateAssetMenu(fileName = "Chave", menuName = "Novo Item/ Chave")]
 public class Chave : Item
 {
     public int numeroChave;
@@ -14,17 +14,16 @@ public class Chave : Item
     {
         return descricao;
     }
-    public override Sprite sprite()
+    /*public override Sprite sprite()
     {
         return sprite;
-    }
+    }*/
     public override GameObject ItemPrefab()
     {
         return itemPrefab;
     }
-    public int PegarNumeroChave()
+    public int NumeroChave()
     {
         return numeroChave;
     }
-
 }

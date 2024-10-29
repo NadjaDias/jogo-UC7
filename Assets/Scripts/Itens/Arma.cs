@@ -17,18 +17,18 @@ public class Arma : Item
     {
         return descricao;
     }
-    public override Sprite sprite()
+    /*public override Sprite sprite()
     {
         return sprite;
-    }
+    }*/
     public  override GameObject ItemPrefab()
     {
         return itemPrefab;
     }
-    public bool ehMagico()
+    /*public bool ehMagico()
     {
         return ehMagico;
-    }
+    }*/
     public int Dano()
     {
         return dano;

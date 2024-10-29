@@ -15,12 +15,20 @@ public class Pocao : Item
     {
         return descricao;
     }
-    public override Sprite sprite()
+    /*public override Sprite sprite()
     {
         return sprite;
-    }
+    }*/
     public override GameObject ItemPrefab()
     {
         return itemPrefab;
+    }
+    public TipoPocao Tipo()
+    {
+        return tipo;
+    }
+    public int Tamanho()
+    {
+        return tamanho; 
     }
 }
