@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bau : MonoBehaviour
 {
+    [SerializeField] public Animator animator;
     [SerializeField] GameObject particulas;
     [SerializeField] private bool ehMagico;
     [SerializeField] private int numeroChave;
@@ -23,6 +24,7 @@ public class Bau : MonoBehaviour
             particulas.SetActive(false);
             ouro = Random.Range(0, 100);
         }
+        animator = GetComponent<Animator>();
     }
 
     private void DesativaParticulas()
@@ -53,7 +55,6 @@ public class Bau : MonoBehaviour
     }
     public List<GameObject> AcessarConteudoBau()
     {
-        Debug.Log("Você coletouos Itens do Bau");
         return itens;
     }
     public void RemoverConteudoBau()
@@ -63,11 +64,16 @@ public class Bau : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Player"))
-        {
-            if(GetComponent<Player>().pegando = true)
-            {
-                GetComponent<Animator>().SetBool("Abrir", true);
-            }
+        {  
+            animator.SetBool("Abrir", true);
+            PegarOuro();
+            AcessarConteudoBau();
         }
+        else
+        {
+            animator.SetBool("Abrir", false);
+        }
+        
+
     }
 }
